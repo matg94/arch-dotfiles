@@ -1,0 +1,26 @@
+
+
+# Basic Settings
+set $mod Mod4
+set $term alacritty
+set $menu wofi
+
+focus_follows_mouse no 
+
+# Waybar
+bar {
+    swaybar_command waybar
+}
+
+# Include
+include ./config.d/*
+
+# Workspace Locks
+workspace 1 output HDMI-A-2
+workspace 2 output DP-1
+
+
+# Auto start
+exec systemctl --user import-environment
+exec swaybg -i ~/Downloads/archlinux.png
+exec mako
