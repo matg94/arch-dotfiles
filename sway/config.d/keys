@@ -10,6 +10,9 @@ set $mod Mod4
     # Kill focused window
     bindsym $mod+q kill
 
+    # Lockscreen
+    bindsym $mod+control+q exec $locker
+
     # Start your launcher
     bindsym $mod+space exec $menu
 
@@ -25,10 +28,11 @@ set $mod Mod4
 # Moving around:
 #
     # Move your focus around
-    # bindsym $mod+$left focus left
-    # bindsym $mod+$down focus down
-    # bindsym $mod+$up focus up
-    # bindsym $mod+$right focus right
+    bindsym $mod+$left focus left
+    bindsym $mod+$down focus down
+    bindsym $mod+$up focus up
+    bindsym $mod+$right focus right
+
     # Or use $mod+[up|down|left|right]
     bindsym $mod+Left focus left
     bindsym $mod+Down focus down
@@ -36,10 +40,10 @@ set $mod Mod4
     bindsym $mod+Right focus right
 
     # Move the focused window with the same, but add Shift
-    # bindsym $mod+Shift+$left move left
-    # bindsym $mod+Shift+$down move down
-    # bindsym $mod+Shift+$up move up
-    # bindsym $mod+Shift+$right move right
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
     # Ditto, with arrow keys
     bindsym $mod+Shift+Left move left
     bindsym $mod+Shift+Down move down
@@ -86,7 +90,10 @@ set $mod Mod4
     # bindsym $mod+w layout tabbed
     # bindsym $mod+e layout toggle split
 
-    bindsym $mod+p grimshot --notify save
+    # Shift to save directly, without for clipboard
+    bindsym $mod+Shift+p exec grim -g "$(slurp -b 2e3440BB -c 88c0d0FF -w 4)" -o "/home/mat/screenshots/$(date '+%Y%m%d%H%M%S').png" && notify-send "Screenshot saved to file screenshots/$(date '+%Y%m%d%H%M%S').png"
+    bindsym $mod+p exec grim -g "$(slurp -b 2e3440BB -c 88c0d0FF -w 4)" | wl-copy && notify-send "Screenshot saved clipboard"
+
 
     # Make the current focus fullscreen
     bindsym $mod+f fullscreen

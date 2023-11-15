@@ -1,11 +1,15 @@
 
-
 # Basic Settings
 set $mod Mod4
 set $term alacritty
 set $menu wofi
+focus_follows_mouse no
 
-focus_follows_mouse no 
+# Using letters as arrows to avoid raising layer on keyboard
+set $left h
+set $down j
+set $up k
+set $right l
 
 # Waybar
 bar {
@@ -17,10 +21,51 @@ include ./config.d/*
 
 # Workspace Locks
 workspace 1 output HDMI-A-2
-workspace 2 output DP-1
+workspace 2 output HDMI-A-2
+workspace 3 output HDMI-A-2
+workspace 4 output HDMI-A-2
+workspace 6 output DP-1
+workspace 7 output DP-1
+workspace 8 output DP-1
+workspace 9 output DP-1
 
+# Random Wallpaper
+set $wallpapers_path $(find $HOME/.wallpapers  -type f | shuf -n 1)
+output * bg $wallpapers_path fill
 
 # Auto start
 exec systemctl --user import-environment
-exec swaybg -i ~/Downloads/archlinux.png
 exec mako
+
+# Screen locking & timeout
+set $locker 'swaylock \
+             	--image $wallpapers_path \
+             	--clock \
+             	--font JetBrainsMonoNerdfont \
+             	--indicator \
+             	--indicator-radius 200 \
+             	--indicator-thickness 30 \
+             	--effect-blur 5x5 \
+             	--ring-color 88c0d0 \
+             	--ring-clear-color ebcb8b \
+             	--ring-ver-color 81a1c1 \
+             	--inside-clear-color ebcb8b \
+                --ring-wrong-color bf616a \
+                --inside-wrong-color bf616a \
+                --inside-ver-color 81a1c1 \
+             	--key-hl-color a3be8c \
+             	--line-color 00000000 \
+             	--inside-color 2e3440 \
+             	--separator-color 00000000 \
+             	--bs-hl-color ebcb8b \
+             	--text-color d8dee9 \
+             	--grace 2 \
+             	--fade-in 0.5'
+
+exec swayidle -w \
+    timeout 1800 $locker \
+    timeout 900 'swaymsg "output * dpms off"' \
+        resume 'swaymsg "output * dpms on"' \
+    timeout 15 'if pgrep -x swaylock; then swaymsg "output * dpms off"; fi' \
+        resume 'swaymsg "output * dpms on"' \
+    before-sleep $locker
