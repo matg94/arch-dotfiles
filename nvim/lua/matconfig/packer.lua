@@ -47,4 +47,16 @@ return require('packer').startup(function(use)
 
   use('nvim-tree/nvim-web-devicons')
 
+  use ("lukas-reineke/indent-blankline.nvim")
+
+  use {
+      "SmiteshP/nvim-navbuddy",
+      requires = {
+          "neovim/nvim-lspconfig",
+          "SmiteshP/nvim-navic",
+          "MunifTanjim/nui.nvim",
+          "numToStr/Comment.nvim",        -- Optional
+      }
+  }
+
 end)
