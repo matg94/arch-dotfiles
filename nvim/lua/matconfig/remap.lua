@@ -29,3 +29,7 @@ vim.keymap.set("n", "<leader>Y", "\"+Y")
 -- CtrlC remap to escape
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
+-- Navbudy 
+vim.keymap.set("n", "<C-p>", vim.cmd.Navbuddy) 
+vim.keymap.set("n", "<leader>bb", vim.cmd.Navbuddy)
+

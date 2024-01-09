@@ -27,5 +27,7 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
 
+vim.cmd([[highlight Pmenu ctermbg=white guibg=white]])
+
 vim.g.mapleader = " "
 
